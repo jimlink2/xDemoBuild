@@ -1,0 +1,348 @@
+    1  cd /var/www/html
+    2  vi ~/.ssh/authorized_keys
+    3  sudo yum update -y
+    4  sudo amazon-linux-extras install -y
+    5  sudo yum install -y httpd
+    6  cd /var/www/html/
+    7  sudo usermod -a -G apache ec2-user
+    8  sudo chown -R ec2-user:apache /var/www
+    9  sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+   10  find /var/www -type f -exec sudo chmod 0664 {} \;
+   11  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+   12  cd
+   13  . ~/.nvm/nvm.sh 
+   14  nvm install --lts
+   15  node -e "console.log('Running Node.js ' + process.version)"
+   16  sudo yum install https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
+   17  sudo amazon-linux-extras install epel -y
+   18  sudo yum -y install mysql-community-server
+   19  sudo systemctl enable --now mysqld
+   20  systemctl status mysqld
+   21  sudo grep 'temporary password' /var/log/mysqld.log
+   22  sudo mysql_secure_installation -p
+   23  mysql -uroot -p
+   24  history
+   25  sudo systemctl is-enabled httpd
+   26  sudo systemctl start httpd && sudo systemctl enable httpd
+   27  sudo yum install -y mod_ssl
+   28  sudo yum update -y
+   29  sudo systemctl stop httpd
+   30  alias
+   31  cd /var/www/html/
+   32  vi i443.js 
+   33  vi ~/.bashrc 
+   34  source ~/.bashrc
+   35  alias
+   36  fi8
+   37  npm install forever -g
+   38  fi8
+   39  sudo npm install forever -g
+   40  node -v
+   41  npm -v
+   42  npm install forever -g
+   43  npm audit fix --force
+   44  sudo systemctl is-enabled httpd
+   45  cd /etc/pki/tls/certs
+   46  vi /etc/httpd/conf.d/ssl.conf 
+   47  sudo systemctl start httpd
+   48  cdh
+   49  ls
+   50  vi index.js 
+   51  vi test.php
+   52  rm test.php 
+   53  cd /etc/pki/tls/certs
+   54  ls
+   55  vi make-dummy-cert 
+   56  vi localhost.crt 
+   57  sudo ./make-dummy-cert localhost.crt
+   58  vi /etc/httpd/conf.d/ssl.conf
+   59  sudo vi /etc/httpd/conf.d/ssl.conf
+   60  sudo systemctl restart httpd
+   61  cd
+   62  sudo wget -r --no-parent -A 'epel-release-*.rpm' https://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/
+   63  sudo rpm -Uvh dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-*.rpm
+   64  sudo yum-config-manager --enable epel*
+   65  sudo yum repolist all
+   66  sudo vi /etc/httpd/conf/httpd.conf 
+   67  sudo systemctl restart httpd
+   68  sudo amazon-linux-extras install epel -y
+   69  sudo yum install -y certbot python2-certbot-apache
+   70  sudo certbot
+   71  sudo cat /etc/letsencrypt/live/colorballnumbers.com/fulllchain.pem
+   72  sudo cd /etc/letsencrypt/live/colorballnumbers.com
+   73  sudo -su root
+   74  mysql -u root -p
+   75  sudo systemctl stop httpd
+   76  alias
+   77  fi8
+   78  forever -help
+   79  forever -v
+   80  forever --help
+   81  alias
+   82  forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+   83  forever list
+   84  i8
+   85  lsof -i :80
+   86  cdh
+   87  i8
+   88  lsof -i :80
+   89  fi4
+   90  sra
+   91  fi8
+   92  npm install forever -g
+   93  fi8
+   94  sudo npm install forever -g
+   95  npm prefix
+   96  cd
+   97  npm prefix
+   98  npm prefix -g
+   99  vi ~/.npmrc
+  100  alias
+  101  via
+  102  cdh
+  103  npm install forever
+  104  npm install
+  105  forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+  106  sudo forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+  107  ls
+  108  ls -la
+  109  mkdir logs
+  110  fi8
+  111  sudo forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+  112  forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+  113  forever list
+  114  vi logs/i80_log.txt 
+  115  sudo systemctl status httpd
+  116  sudo systemctl start httpd
+  117  sudo systemctl stop httpd
+  118  ls
+  119  . ./node_modules/forever/bin/forever start -a -l /var/www/html/logs/i80_log.txt -o /var/www/html/logs/i80_out.txt -e /var/www/html/logs/i80_error.txt i80.js
+  120  forever list
+  121  alias
+  122  forever start -a -l /var/www/html/logs/i443_log.txt -o /var/www/html/logs/i443_out.txt -e /var/www/html/logs/i443_error.txt i443.js
+  123  forever list
+  124  forever stop all
+  125  forever stopall
+  126  forever list
+  127  vi logs/i443_log.txt 
+  128  which forever
+  129  cd
+  130  pwd
+  131  cd /.nvm/versions/node/v16.17.0/bin
+  132  cd ./.nvm/versions/node/v16.17.0/bin/forever
+  133  cd .nvm/versions/node/v16.17.0/bin/
+  134  ls
+  135  cd forever
+  136  ls -la
+  137  ls /usr/local/lib/
+  138  sudo ls /usr/local/lib/
+  139  cd ../lib/node_modules/forever/bin/
+  140  ls
+  141  ls -la
+  142  pwd
+  143  PATH
+  144  $PATH
+  145  via
+  146  alias
+  147  sra
+  148  $PATH
+  149  cdh
+  150  fi8
+  151  cdh
+  152  sudo forever list
+  153  which forever
+  154  ~/.nvm/versions/node/v16.17.0/bin/forever list
+  155  $PATH
+  156  bad_path=/home/ec2-user/.nvm/versions/node/v16.17.0/lib/node_modules/forever/bin
+  157  $bad_path
+  158  PATH=:$PATH:
+  159  $PATH
+  160  PATH=${PATH//:$bad_path:/:}
+  161  PATH=${PATH#:}; PATH=${PATH%:}
+  162  $PATH
+  163  which forever
+  164  pwd
+  165  cd ~/.nvm/versions/node/v16.17.0/bin/
+  166  ls
+  167  pwd
+  168  via
+  169  source ~/.bashrc 
+  170  sudo forever list
+  171  sudo -su root
+  172  sudo forever list
+  173  cdh
+  174  sudo forever list
+  175  fls
+  176  npm install -g forever
+  177  forever list
+  178  sudo forever list
+  179  sudo npm install -g forever
+  180  sudo nvm install --lts
+  181  sudo . ~/.nvm/nvm.sh 
+  182  sudo apt-get install npm
+  183  sudo yum install npm
+  184  fls
+  185  sudo node -v
+  186  sudo npm -v
+  187  sudo npm --help
+  188  which forever
+  189  sudo ~/.nvm/versions/node/v16.17.0/bin/forever list
+  190  cd
+  191  sudo ./.nvm/versions/node/v16.17.0/bin/forever list
+  192  ls -la ~/.nvm/versions/node/v16.17.0/bin/forever
+  193  cd ../lib/node_modules/forever/bin
+  194  cd.nvm/versions/node/v16.17.0/
+  195  cd .nvm/versions/node/v16.17.0/lib/node_modules/forever/bin/
+  196  ls
+  197  sudo ./forever list
+  198  pwd
+  199  sudo /home/ec2-user/.nvm/versions/node/v16.17.0/lib/node_modules/forever/bin/forever list
+  200  cdh
+  201  sudo yum install nodejs npm --enablerepo=epel
+  202  nvm --version
+  203  sudo nvm --version
+  204  $HOME
+  205  cd $HOME
+  206  ls
+  207  pwd
+  208  sudo npm install -g forever
+  209  npx -v
+  210  npx forever list
+  211  sudo npx forever list
+  212  alias
+  213  npx forever start -a -l /var/www/html/logs/i443_log.txt -o /var/www/html/logs/i443_out.txt -e /var/www/html/logs/i443_error.txt i443.js
+  214  npx foerver list
+  215  npx forever list
+  216  forever start -a -l /var/www/html/logs/i443_log.txt -o /var/www/html/logs/i443_out.txt -e /var/www/html/logs/i443_error.txt i443.js
+  217  cdh
+  218  forever start -a -l /var/www/html/logs/i443_log.txt -o /var/www/html/logs/i443_out.txt -e /var/www/html/logs/i443_error.txt i443.js
+  219  forever list
+  220  vi logs/i443_log.txt 
+  221  vi logs/i80_log.txt 
+  222  sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  223  sudo . ~/.nvm/nvm.sh 
+  224  . ~/.nvm/nvm.sh 
+  225  sudo nvm install --lts
+  226  n=$(which node);
+  227  $n
+  228  n=${n%/bin/node};
+  229  chmod -R 755 $n/bin/*;
+  230  sudo cp -r $n/{bin,lib,share} /usr/local
+  231  sudo nvm -v
+  232  which nvm
+  233  via
+  234  $NVM_DIR
+  235  nvm -v
+  236  nvm --version
+  237  ls \$NVM_DIR/versions 
+  238  ls $NVM_DIR/versions 
+  239  ls $NVM_DIR/versions/node
+  240  ls $NVM_DIR/versions/node/v16.17.0 
+  241  ls $NVM_DIR/versions/node/v16.17.0/bin
+  242  sudo ln -s "$NVM_DIR/versions/node/v16.17.0/bin/node" "/usr/local/bin/node"
+  243  sudo ln -s "$NVM_DIR/versions/node/v16.17.0/bin/npm" "/usr/local/bin/npm"
+  244  sudo node --version
+  245  whereis node
+  246  sudo ln -s /home/ec2-user/.nvm/versions/node/v16.17.0/bin/node /usr/bin/node
+  247  sudo node -v
+  248  fi8
+  249  sudo forever install -g
+  250  sudo npm install forever -g
+  251  whereis npm
+  252  sudo ln -s /home/ec2-user/.nvm/versions/node/v16.17.0/bin/npm /usr/bin/npm
+  253  sudo npm install forever -g
+  254  sudo forever list
+  255  sudo npm audit fix --force
+  256  sudo forever list
+  257  fls
+  258  whereis forever
+  259  sudo ln -s /home/ec2-user/.nvm/versions/node/v16.17.0/bin/forever /usr/bin/forever
+  260  fls
+  261  fi8
+  262  fls
+  263  fi4
+  264  fls
+  265  vi logs/i443_log.txt 
+  266  fi4
+  267  fls
+  268  vi logs/i443_log.txt 
+  269  fi4
+  270  fls
+  271  fsa
+  272  fls
+  273  fi4
+  274  fls
+  275  vi logs/i443_log.txt 
+  276  vi logs/i80_log.txt 
+  277  fls
+  278  fsa
+  279  fls
+  280  fi4
+  281  fls
+  282  vi logs/i443_log.txt 
+  283  vi i443.js 
+  284  vi logs/i443_log.txt 
+  285  vi test.js
+  286  node test.js 
+  287  sudo npm install
+  288  sud node test.js 
+  289  sudo node test.js 
+  290  node test.js 
+  291  npm un mysql && npm i mysql2
+  292  vi test.js 
+  293  node test.js 
+  294  mysql -u colorer -p
+  295  mysql -u root -p
+  296  node test.js 
+  297  sudo node test.js 
+  298  mysql -u root -p
+  299  mysql -u colorer -p
+  300  node test.js 
+  301  sudo node test.js 
+  302  mysql -u root -p
+  303  vi test.js 
+  304  node test.js 
+  305  sudo node test.js 
+  306  vi i443.js 
+  307  fls
+  308  fsa
+  309  fls
+  310  fi4
+  311  fls
+  312  vi logs/i443_log.txt 
+  313  npm un mysql2 && npm i mysql
+  314  fsa
+  315  fls
+  316  npm install
+  317  sudo npm install
+  318  fi4
+  319  fls
+  320  fi8
+  321  fls
+  322  alias
+  323  npm run build
+  324  fra
+  325  fls
+  326  ls
+  327  ls dist
+  328  fls
+  329  vi logs/i443_log.txt 
+  330  tail -f logs/i443_log.txt 
+  331  vi logs/i443_log.txt 
+  332  fra
+  333  tail -f logs/i443_log.txt 
+  334  vi logs/i443_log.txt 
+  335  node test.js 
+  336  vi test.js 
+  337  node test.js 
+  338  sudo -su root
+  339  vi home.html 
+  340  npm run build
+  341  vi home.html 
+  342  npm run build
+  343  vi index.html 
+  344  cd dist
+  345  rm -rf *
+  346  cd ../
+  347  npm run build
+  348  history

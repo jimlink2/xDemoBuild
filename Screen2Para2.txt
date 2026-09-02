@@ -1,0 +1,1 @@
+If a submitted 3-digit number becomes EXACTLY matched by the last three digits of the next 4-digit "hit" number, the gift is $100.00.   For matching all four digits of the  “hit” number EXACTLY, the gift is $1,000.00.

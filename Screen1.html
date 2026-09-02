@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-6219561437402641">
+    <title>Colorball Numbers - Video</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link href="./assets/css/default.css" rel="stylesheet" />
+    <script>
+      function getSearchInfo() {
+        //var searchStr = window.location.search;
+        let anchorSearch = "";
+        const params = new URLSearchParams(window.location.search);
+        const incr = Number(params.get("incr") || 0);
+        const lastFour = params.get("lastFour") || "";
+        const store = params.get("store") || "";
+        const pronoun = params.get("pronoun") || "";
+        const phonePlays = Number(params.get("phonePlays") || 0);
+        const faveNums = params.get("faveNums") || "";
+        const playDiv = document.getElementById('exceededPlays');
+        let   lastReset = Number(params.get("lastReset") || 0);
+        let   playsRaw  = params.get("plays") || "";
+        console.log("lastReset A is " + lastReset);
+        
+        if (!lastReset) {
+            lastReset = Date.now();   // initialize virtual day
+        }
+        console.log("lastReset B is " + lastReset);
+
+        console.log("Screen1 params:", { incr, store, lastFour, lastReset, pronoun, phonePlays, faveNums, playsRaw });
+
+        if (params.toString() !== "") {
+        //if (searchStr != '') {
+          //var exceededPlays = searchStr.indexOf("playsExceeded");
+          const exceededPlays = Number(params.get("playsExceeded") || 0);
+          if (exceededPlays > 0) {
+            anchorSearch = '';
+            playDiv.style.visibility = 'visible';
+            playDiv.style.display = 'block';
+          } else {
+            //var anchorSearch = "?tenDigit=" + tenDigit + "&faveNums=" + faveNums + "&pronoun=" + pronoun;
+            anchorSearch =
+              "?faveNums=" + encodeURIComponent(faveNums) +
+              "&store=" + encodeURIComponent(store) +
+              "&pronoun=" + encodeURIComponent(pronoun) +
+              "&lastFour=" + encodeURIComponent(lastFour) +
+              "&phonePlays=" + phonePlays +
+              "&lastReset=" + lastReset +
+              "&incr=" + incr +
+              "&plays=" + playsRaw;
+            playDiv.style.visibility = 'hidden';
+            playDiv.style.display = 'none';
+            if (store == 1) {
+              document.getElementById('store_name2').src = "./assets/img/Sheetz.jpg";
+            } else if (store == 2) {
+              document.getElementById('store_name2').src = "./assets/img/CVS.png";
+            } else if (store == 3) {
+              document.getElementById('store_name2').src = "./assets/img/Coen.png";
+            } else if (store == 4) {
+              document.getElementById('store_name2').src = "./assets/img/Primero.png";
+            } else {
+              document.getElementById('store_name2').src = "./assets/img/Generic.png";
+            }
+          }
+        } else {
+          anchorSearch = '';
+          playDiv.style.visibility = 'hidden';
+          playDiv.style.display = 'none';
+        }
+        document.getElementById('screen2HREF').href = "Screen2.html" + anchorSearch;
+        document.getElementById('screen3HREF').href = "Screen3.html" + anchorSearch;
+//        if (anchorSearch == '') {
+//          var timeoutId = setTimeout(showAd, 30000);
+//        }
+      }
+      
+//      function showAd() {
+//        window.location.href = "showAd.html";
+//      }
+    </script>
+</head>
+
+<body onload="getSearchInfo()" id="Screen1Body">
+    <div id="Screen1Container" class="container-fluid">
+      <div id="Screen1TextContainer" className="bg-white text-center">
+          <div id="Screen1KioskDiv" className="col-12 kiosk_container">
+                <div id="mainDiv5" className="row">
+                  <div id="leftDiv3">
+                    <div class="cash_prize_div2">
+                        EVERY DAY
+                    </div>
+                    <div class="cash_prize_div2">
+                        YOU GET <span class="red1">3 FREE CHANCES</span>
+                    </div>
+                    <div class="cash_prize_div2">
+                        TO RECEIVE A <span class="red1">CASH GIFT</span> OF
+                    </div>
+                    <div class="cash_prize_div2">
+                    <span class="emphasis">
+                      <span class="big">
+                        <p style={{ fontFamily: 'Arial' }}></p> $1,000.00</span></span>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="play_five2">
+                      BY GUESSING THE NEXT
+                    </div>
+                    <div class="play_five2">
+                      4-DIGIT RANDOM "HIT"
+                    </div>
+                    <div class="play_five2">
+                      NUMBER RIGHT HERE AT
+                    </div>
+                    <div id="store_img_div">
+                      <!--<p>Sheetz</p>-->
+                      <img src="./assets/img/StoreImage.png" id="store_name2">
+                    </div>
+                    <div id="exceededPlays">
+                      Too many plays today!
+                    </div>
+
+                  </div>
+                  <div id="rightDiv3">
+                    <a id="screen2HREF" href="#">
+                      <div id="tap_gently_rules2">
+                        Tap for<br />
+                        Rules
+                      </div>
+                    </a>
+                    <a id="screen3HREF" href="#">
+                      <div id="tap_gently2">
+                        Tap to<br />
+                        Begin
+                      </div>
+                    </a>
+                      <div id="chambers_div">
+                        <!--<img src="./assets/img/MixingChambers2.png" id="chambers_start2" />-->
+                        <video id="CroppedChambers1" autoplay loop muted>
+                          <source type="video/mp4" src="./assets/img/4_Mixing_Chambers.mp4" />
+                        </video>
+                      </div>
+                   </div>
+                </div>
+          </div>
+      </div>
+    </div>
+
+</body>
+
+</html>

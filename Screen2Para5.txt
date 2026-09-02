@@ -1,0 +1,1 @@
+After making their selections and tapping the Submit button, the next screen will display a video ad that promotes an in-store product of the designated gender. During the final six seconds of the video ad, viewers can tap the screen. If a viewer fails to tap the screen during the video ad's final six seconds, another video ad will be displayed.

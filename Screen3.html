@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorball Numbers - Kiosks</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link href="./assets/css/default.css" rel="stylesheet" />
+  </head>
+
+  <body onload="getSearchInfo()">
+	        <div className="row col-12" id="Screen_sub" style={{ background: '#FFF', height: '100%vh' }}>
+	            <div>
+			            <div className="bg-white text-center">
+			                <div className="col-12 kiosk_container">
+                        <div>
+                          <div>
+                             <div id="mainDiv4" className="row">
+                                <div id="leftDiv">
+                                  <div id="enterLast4">
+                                    <div>
+                                      Please enter the final four digits of 
+                                      your government issued ID number.
+                                    </div>
+                                    <!--Select your preferred gender
+                                    <br />
+                                    of video ads as shown above.
+                                    -->
+                                    <!--
+                                    <br />
+                                    Then enter your mobile phone number
+                                    using the numbered buttons.
+                                    <br />
+                                    -->
+                                    <span id="four_digits">____ ____ ____ ____</span>
+                                    <!-- Select the gender of 
+                                    video ads you prefer to
+                                    view by tapping one of 
+                                    the round buttons above. -->
+                                  </div>
+                                  <div id="MrMrsDiv">
+                                    <form id="myForm">
+                                      <div id="MrMrsTextDiv">
+                                        To designate the gender of the 
+                                        video ads you prefer to view, please 
+                                        tap one of the gender-buttons below. 
+                                      </div>
+                                       <input class="genderinput" type="radio" id="female" name="gender" value="Ms.">
+                                         <label for="female" id="femaleLabel">
+                                           <img id="femaleImg" class='genderButton' onclick="genderClicked(this)" src="./assets/img/femaleBall.png" />
+                                         </label>
+                                       <input class="genderinput" type="radio" id="male" name="gender" value="Mr.">
+                                         <label for="male" id="maleLabel">
+                                           <img id="maleImg" class='genderButton' onclick="genderClicked(this)" src="./assets/img/maleBall.png" />
+                                         </label>
+                                       <input class="genderinput" type="radio" id="nogender" name="gender" value="N.A.">
+                                         <label for="nogender" id="noGenderLabel">
+                                           <img id="nogenderImg" class='genderButton' onclick="genderClicked(this)" src="./assets/img/noGenderBall.png" />
+                                         </label>
+                                    </form>
+                                  </div>
+                                  <div id="fave3or4">
+                                    <!-- To play, enter your favorite 3-
+                                    <br />
+                                    digit or 4-digit number with
+                                    <br />
+                                    the buttons then tap Submit.
+                                    <br />
+                                    -->
+                                    Then, create a number that you
+                                    guess will match the next randomly
+                                    generated number, and
+                                    tap the submit button. 
+                                    <br />
+                                    <span id="fave_digits">____ ____ ____ ____</span>
+                                    <!--<div id="fave_digits">____ ____ ____</div>-->
+                                  </div>
+                                </div>
+                                <div id="rightDiv">
+                                  <div id="buttonPad">
+                                    <div>
+                                      <a href="#" onclick="num_ball_clicked('1'); return false;"><img className='numpad regularButton' numval='1' src="./assets/img/Ball1_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('2'); return false;"><img className='numpad regularButton' numval='2' src="./assets/img/Ball2_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('3'); return false;"><img className='numpad regularButton' numval='3' src="./assets/img/Ball3_r.png" /></a>
+                                    </div>
+                                    <div>
+                                      <a href="#" onclick="num_ball_clicked('4'); return false;"><img className='numpad regularButton' numval='4' src="./assets/img/Ball4_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('5'); return false;"><img className='numpad regularButton' numval='5' src="./assets/img/Ball5_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('6'); return false;"><img className='numpad regularButton' numval='6' src="./assets/img/Ball6_r.png" /></a>
+                                    </div>
+                                    <div>
+                                      <a href="#" onclick="num_ball_clicked('7'); return false;"><img className='numpad regularButton' numval='7' src="./assets/img/Ball7_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('8'); return false;"><img className='numpad regularButton' numval='8' src="./assets/img/Ball8_r.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('9'); return false;"><img className='numpad regularButton' numval='9' src="./assets/img/Ball9_r.png" /></a>
+                                    </div>
+                                    <div id="bottomRow">
+                                      <a href="#" onclick="deleteNum(); return false;"><img id='numpad-delete-plain' className='numpad btn-danger clearButton2 numpad-control' src="./assets/img/Ball_delete.png" /></a>
+                                      <a href="#" onclick="num_ball_clicked('0'); return false;"><img id="separateZero" className='numpad regularButton' numval='0' src="./assets/img/Ball0_r.png" /></a>
+                                      <a href="#" id="submit_button_a" onclick="submitNum(); return false;"><img id='numpad-submit-plain' className='enterButton2' src="./assets/img/Ball_submit.png" /></a>
+                                      <div id="enterButton2Mask">&nbsp;</div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <input type="checkbox" id="fakeDay">
+                                </div>
+                             </div>
+                          </div>
+                          <div id="TooManyPlaysWarning">
+                            No more guesses today.<br>
+                            Come back tomorrow.
+                          </div>
+			                  </div>
+			                </div>
+			            </div>
+	            </div>
+	        </div>
+    <script>
+      var genderChosen = '';
+      var numbersChosen = '';
+      var activePanel = 'fave_digits';
+      var faveDigits = '';
+      var displayFourDigits = '';
+      var displayFaveDigits = '';
+      var displayDigits = '';
+      //var genderChosen = false;
+      var constNBSP = '&nbsp;';
+      var returnDigits = '';
+
+      function getSearchInfo() {
+      
+        // -------------------------------
+        // READ URL PARAMETERS SAFELY
+        // -------------------------------
+        const params = new URLSearchParams(window.location.search);
+      
+        const incr       = Number(params.get("incr") || 0);
+        const lastFour   = params.get("lastFour")   || "";
+        const store      = params.get("store")   || "";
+        const pronoun    = params.get("pronoun")    || "";
+        let phonePlays   = Number(params.get("phonePlays") || 0);
+        const faveNums   = params.get("faveNums")   || "";
+        let   lastReset  = Number(params.get("lastReset") || 0);
+        let   playsRaw   = params.get("plays") || "";
+        
+        console.log("Screen3 params:", { incr, store, lastFour, lastReset, pronoun, phonePlays, faveNums, playsRaw });
+      
+        // -------------------------------
+        // DETERMINE IF WE HAVE PARAMETERS
+        // -------------------------------
+        //const hasParams = params.toString() !== "";
+      
+        //if (hasParams) {
+        if (lastFour != "" && faveNums != "") {
+      
+          // -------------------------------
+          // FORMAT LAST FOUR DIGITS FOR DISPLAY
+          // -------------------------------
+          let lastFourDisp = "";
+          for (let i = 0; i < lastFour.length; i++) {
+            lastFourDisp += lastFour[i] + " ";
+          }
+          lastFourDisp = lastFourDisp.trim();
+      
+          // -------------------------------
+          // SET UI STATE
+          // -------------------------------
+          activePanel = "fave_digits";
+          genderChosen = true;
+          numbersChosen = true;
+      
+          document.getElementById("enterButton2Mask").style.visibility = "hidden";
+      
+          faveDigits = faveNums;
+      
+          console.log("faveDigits =", faveDigits);
+      
+          displayDigits = buildDisplayDigits(faveDigits.length);
+          console.log("displayDigits =", displayDigits);
+      
+          document.getElementById("fave_digits").innerHTML = displayDigits;
+          document.getElementById("four_digits").innerHTML = lastFourDisp;
+      
+        } else {
+      
+          // -------------------------------
+          // NO PARAMETERS RESET UI
+          // -------------------------------
+          activePanel = "four_digits";
+          fourNums = "____ ____ ____ ____";
+          faveDigits = "";
+          genderChosen = false;
+          numbersChosen = false;
+      
+          document.getElementById(activePanel).innerHTML = fourNums;
+        }
+      
+        // -------------------------------
+        // PRONOUN SELECTION UI
+        // -------------------------------
+        switch (pronoun) {
+          case "Ms.":
+            document.getElementById("femaleImg").style.border = "5px solid red";
+            document.getElementById("femaleImg").style.borderRadius = "45px";
+            document.getElementById("female").checked = true;
+            genderChosen = true;
+            break;
+      
+          case "Mr.":
+            document.getElementById("maleImg").style.border = "5px solid red";
+            document.getElementById("maleImg").style.borderRadius = "45px";
+            document.getElementById("male").checked = true;
+            genderChosen = true;
+            break;
+      
+          case "N.A.":
+            document.getElementById("nogenderImg").style.border = "5px solid red";
+            document.getElementById("nogenderImg").style.borderRadius = "45px";
+            document.getElementById("nogender").checked = true;
+            genderChosen = true;
+            break;
+      
+          default:
+            genderChosen = false;
+        }
+      
+        // -------------------------------
+        // STORE UPDATED VALUES FOR NEXT SCREEN
+        // (You will use these when navigating)
+        // -------------------------------
+        window.updatedState = {
+          incr,
+          store,
+          lastFour,
+          pronoun,
+          phonePlays,
+          faveNums,
+          lastReset,
+          playsRaw
+        };
+      
+        console.log("Updated state for next screen:", window.updatedState);
+      }
+      
+      var fourDigitsChosen = false;
+      var numbersChosen = false;
+      var activePanel = 'four_digits';
+      
+      function change_visibility (new_visibility) {
+        document.getElementById("enterButton2Mask").style.visibility = new_visibility;
+      }
+      
+      function mark_as_clicked (radio_clicked) {
+        // clear any previous borders:
+        const collection = document.getElementsByClassName("genderButton");
+        for (let i = 0; i < collection.length; i++) {
+          collection[i].style.border = "5px solid white";
+          collection[i].style.borderRadius = "45px";
+        }
+        // Now give the clicked image a visible border:
+        var img_element = radio_clicked;
+        img_element.style.border = "5px solid red";
+        img_element.style.borderRadius = "45px";
+      }
+      
+      function genderClicked(image_clicked) {
+        genderChosen = true;
+        if (numbersChosen) {
+          change_visibility('hidden');
+        }
+        mark_as_clicked(image_clicked);
+      }
+      
+      function makeNBSP(numSpaces) {
+        var NBSP = '&nbsp;';
+        var newStr = '';
+        for (var i = 0; i < numSpaces; i++) {
+          newStr += NBSP;
+        }
+        return newStr;
+      }
+      
+      function buildDisplayDigits() {
+        var circle1 = '';
+        var circle2 = '';
+        var circle3 = '';
+        var circle4 = '';
+        var circle1Img = '';
+        var circle2Img = '';
+        var circle3Img = '';
+        var circle4Img = '';
+        if (faveDigits.length == 1) {
+          circle1 = faveDigits[0];
+          circle1Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle1 + ".png'>";
+          returnDigits = circle1Img;
+        } else if (faveDigits.length == 2) {
+          circle1 = faveDigits[0];
+          circle2 = faveDigits[1];
+          circle1Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle1 + ".png'>";
+          circle2Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle2 + ".png'>";
+          returnDigits = circle1Img + circle2Img;
+        } else if (faveDigits.length == 3) {
+          circle1 = faveDigits[0];
+          circle2 = faveDigits[1];
+          circle3 = faveDigits[2];
+          circle1Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle1 + ".png'>";
+          circle2Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle2 + ".png'>";
+          circle3Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle3 + ".png'>";
+          returnDigits = circle1Img + circle2Img + circle3Img;
+        } else if (faveDigits.length == 4) {
+          circle1 = faveDigits[0];
+          circle2 = faveDigits[1];
+          circle3 = faveDigits[2];
+          circle4 = faveDigits[3];
+          circle1Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle1 + ".png'>";
+          circle2Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle2 + ".png'>";
+          circle3Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle3 + ".png'>";
+          circle4Img = "<img class='selectionCircle' src='" + 'assets/img/Ball' + circle4 + ".png'>";
+          returnDigits = circle1Img + circle2Img + circle3Img + circle4Img;
+        }
+        return returnDigits;
+      }
+      
+      function num_ball_clicked(numBall) {
+        console.log('activePanel A is ' + activePanel);
+        if (activePanel == 'four_digits') {  // Filling in the last four I.D.
+          var currNum = document.getElementById(activePanel).innerText;
+          console.log('currNum is ' + currNum);
+          if (currNum == '____ ____ ____ ____') {
+            document.getElementById(activePanel).innerText = numBall;
+          } else if (currNum.length <= 6) {
+            document.getElementById(activePanel).innerText += ' ' + numBall;
+          } else {
+            activePanel = 'fave_digits';
+            num_ball_clicked(numBall);
+          }
+        } else {  // Filling in the favorite digits
+          console.log('faveDigits B is ' + faveDigits);
+          if (faveDigits == '____ ____ ____ ____') {
+            faveDigits = numBall;
+            displayDigits = buildDisplayDigits();
+            console.log("displayDigits A is " + displayDigits);
+            document.getElementById(activePanel).innerHTML = displayDigits;
+          } else if (faveDigits.length <= 3) {
+            faveDigits += numBall;
+            console.log('faveDigits C is ' + faveDigits);
+            displayDigits = buildDisplayDigits();
+            console.log("displayDigits C is " + displayDigits);
+            console.log('activePanel C is ' + activePanel);
+            document.getElementById(activePanel).innerHTML = displayDigits;
+          }
+          
+          if (faveDigits.length >= 3) {   // allow 3 or 4
+            numbersChosen = true;
+            if (genderChosen) {
+              change_visibility ('hidden');
+            } else {
+              change_visibility ('visible');
+            }
+            return;
+          }
+        }
+      }
+      
+      function deleteNum() {
+        console.log('activePanel B is ' + activePanel);
+        if (activePanel == 'fave_digits') {
+          console.log('faveDigits B is ' + faveDigits);
+          if (faveDigits.length > 0 && faveDigits.length < 5) {
+            faveDigits = faveDigits.substring(0, faveDigits.length-1);
+            displayDigits = buildDisplayDigits(faveDigits.length);
+            console.log("displayDigits D is " + displayDigits);
+            document.getElementById(activePanel).innerHTML = displayDigits;
+          }
+          console.log('faveDigits D is ' + faveDigits);
+          console.log('faveDigits.length is ' + faveDigits.length);
+          
+          if (faveDigits.length < 1) {
+            document.getElementById(activePanel).innerText = '____ ____ ____ ____';
+            activePanel = 'four_digits';
+            numbersChosen = false;
+            change_visibility ('visible');
+          } else if (faveDigits.length < 3) {
+            console.log("faveDigits.length E is " + faveDigits.length);
+            numbersChosen = false;
+            change_visibility ('visible');
+          } else {
+            console.log("faveDigits.length F is " + faveDigits.length);
+            numbersChosen = true;
+            change_visibility ('hidden');
+          }
+        } else {   // activePanel is 'four_digits';
+          var currNum = document.getElementById(activePanel).innerText;
+          if (currNum == '____ ____ ____ ____') {
+            return;
+          }
+          console.log('currNum is ' + currNum);
+          var tempNum = '';
+          currNum = currNum.substring(0, currNum.length - 2);  // remove a space and
+                                                               // a digit
+          document.getElementById(activePanel).innerText = currNum;
+          console.log('currNum is ' + currNum);
+          if (currNum.length < 1) {
+            document.getElementById(activePanel).innerText = '____ ____ ____ ____';
+          }
+        }
+      }
+      
+      function submitNum() {
+        const params = new URLSearchParams(window.location.search);
+        let   store      = params.get("store")   || "";
+        let   lastReset  = Number(params.get("lastReset") || 0);
+        //let   plays      = params.get("plays") || "";
+
+        let playsRaw = params.get("plays") || "";
+        let plays = {};
+        
+        if (playsRaw.length > 0) {
+            playsRaw.split(",").forEach(pair => {
+                let [id, count] = pair.split(":");
+                plays[id] = Number(count);
+            });
+        }
+
+        var fakeDay = document.getElementById('fakeDay').checked;
+        console.log('fakeDay checked is ' + fakeDay);
+        var lastFour = document.getElementById('four_digits').innerText;
+        lastFour = lastFour.replaceAll(' ', '');
+        faveNums = faveDigits;
+        if (faveNums == '____ ____ ____ ____' || faveNums.length < 3) {  // allow 3 or 4
+          return;
+        }
+        if (lastFour == '____ ____ ____ ____' || lastFour.length < 4) {
+          return;
+        }
+        
+
+        // See if this user (lastFour) has reached
+        // their limit for today...
+        if (plays[lastFour] >= 3) {
+          let playsEncoded = Object.entries(plays)
+            .map(([id, count]) => `${id}:${count}`)
+            .join(",");
+          const tooManyPlaysWarning = document.getElementById("TooManyPlaysWarning");
+          tooManyPlaysWarning.style.display = "block";
+          setTimeout(() => {
+            window.location.href = "Screen1.html?&store=" + store + "&lastReset=" + lastReset + "&plays=" + playsEncoded;
+          }, 5000);
+          return; 
+        } else {
+          plays[lastFour] = (plays[lastFour] || 0) + 1;
+        }
+
+        //tenDigit = tenDigit.replace(/ /g, "");
+        //faveNums = faveNums.replace(/ /g, "");
+        genders = document.getElementsByName("gender");
+        for (var i = 0; i < genders.length; i++) {
+          if (genders[i].checked) {
+            pronoun = genders[i].value;
+            break;
+          }
+        }
+        if (pronoun == '') {
+          //pronoun = "N.A.";
+          alert ("Please tap your pronoun before submitting your number.");
+          return false;
+        }
+        //window.location.href = "Screen4.html?tenDigit=" + tenDigit + "&faveNums=" + faveNums + "&pronoun=" + pronoun;
+        //window.location.href = "/screen4";
+        //window.location.href = "screen4?tenDigit=" + tenDigit + "&faveNums=" + faveNums + "&pronoun=" + pronoun;
+        
+        window.updatedState.faveNums = faveNums;
+        window.updatedState.pronoun  = pronoun;
+        window.updatedState.lastFour = lastFour;
+        //window.updatedState.phonePlays = window.updatedState.phonePlays + 1;
+        
+        const s = window.updatedState;
+
+        let playsEncoded2 = Object.entries(plays)
+            .map(([id, count]) => `${id}:${count}`)
+            .join(",");
+
+        if (fakeDay) {
+            window.location.href =
+            `screen4.html?` +
+            `incr=${s.incr}` +
+            `&store=${encodeURIComponent(s.store)}` +
+            `&lastFour=${encodeURIComponent(s.lastFour)}` +
+            `&pronoun=${encodeURIComponent(s.pronoun)}` +
+            `&phonePlays=${s.phonePlays}` +
+            `&faveNums=${encodeURIComponent(s.faveNums)}` +
+            `&lastReset=${s.lastReset}` +
+            `&plays=${playsEncoded2}` +
+            `&fakeDay=1`;
+        } else {
+          window.location.href =
+            `screen4.html?` +
+            `incr=${s.incr}` +
+            `&store=${encodeURIComponent(s.store)}` +
+            `&lastFour=${encodeURIComponent(s.lastFour)}` +
+            `&pronoun=${encodeURIComponent(s.pronoun)}` +
+            `&phonePlays=${s.phonePlays}` +
+            `&faveNums=${encodeURIComponent(s.faveNums)}` +
+            `&lastReset=${s.lastReset}` +
+            `&plays=${playsEncoded2}`;
+        }
+      }
+    </script>
+  </body>
+</html>

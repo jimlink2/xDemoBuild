@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorball Numbers - Video</title>
+    <link href="./assets/css/default.css" rel="stylesheet" />
+  </head>
+
+  <body onload="placeNums()">
+    <a id="nextScreenHREF" href="#">
+      <div id="nextScreen"></div>
+    </a>
+    <div id="container" class="container-fluid">
+    </div>
+    <div id="mainDiv2" className="row">
+      <div id="pronoun"></div>
+      <div id="playingQuo"></div>
+      <!--<div id="tenDigit"></div>-->
+      <div id="gameNo"></div>
+      <div id="faveNums"></div>
+      <div id="winning_number"></div>
+      <div id="ReplayButton">REPLAY</div>
+      <div id="WinnerButton">YOU WON!</div>
+      <div id="TooManyReplays">No more replays today!</div>
+    </div>
+    <script>
+//      let faveNums = "";
+//      let pronoun = "";
+//      let lastFour = "";
+//      let phonePlays = 0;
+//      let lastReset = 0;
+//      let user = '';
+//      
+//      function moveOn() {
+//        window.location.href =
+//          "Screen1.html?" +
+//          "faveNums=" + encodeURIComponent(faveNums) +
+//          "&pronoun=" + encodeURIComponent(pronoun) +
+//          "&lastFour=" + encodeURIComponent(lastFour) +
+//          "&phonePlays=" + phonePlays +
+//          "&lastReset=" + lastReset;
+//      }
+//    
+      function placeNums() {
+    
+        // -------------------------------
+        // READ URL PARAMETERS
+        // -------------------------------
+        const params = new URLSearchParams(window.location.search);
+    
+        store      = params.get("store")      || "";
+        faveNums   = params.get("faveNums")   || "";
+        pronoun    = params.get("pronoun")    || "";
+        lastFour   = params.get("lastFour")   || "";
+        //phonePlays = Number(params.get("phonePlays") || 0);
+        lastReset  = Number(params.get("lastReset")  || 0);
+        let playsRaw  = params.get("plays") || "";
+        user = params.get("user") || "";
+        const pp = params.get("phonePlays");
+        if (pp !== null) {
+            phonePlays = Number(pp);
+        }
+
+        console.log("Screen5 params:", {
+          faveNums, pronoun, lastFour, store, phonePlays, lastReset, playsRaw
+        });
+    
+        // -------------------------------
+        // UPDATE lastReset (SAFE EVEN IF CLOCK IS WRONG)
+        // -------------------------------
+        //lastReset = Date.now();
+    
+        //console.log("Updated lastReset =", lastReset);
+    
+        // -------------------------------
+        // SET NEXT SCREEN LINK
+        // -------------------------------
+        document.getElementById('nextScreenHREF').href =
+          "Screen1.html?" +
+          "store=" + encodeURIComponent(store) +
+          "&faveNums=" + encodeURIComponent(faveNums) +
+          "&pronoun=" + encodeURIComponent(pronoun) +
+          "&lastFour=" + encodeURIComponent(lastFour) +
+          "&phonePlays=" + phonePlays +
+          "&lastReset=" + lastReset +
+          "&plays=" + playsRaw;
+    
+        // -------------------------------
+        // UPDATE UI ELEMENTS
+        // -------------------------------
+        document.getElementById("pronoun").innerText = pronoun;
+        document.getElementById("faveNums").innerText = faveNums;
+        //document.getElementById("gameNo").innerText = lastFour;
+      }
+    </script>
+    <script src="screen5.js"></script>
+    <script src="main2.js" id="demoscript" demotype="color"></script>
+    <script src="sizing.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Visitors to <span class="red1">CVS</span> stores can begin guessing by tapping the "Blue" button on this screen or on the Idle screen. At the next screen, as shown below, store visitors must enter the final four digits of their government-issued ID numbers and tap the "Submit" button. Providing false info disqualifies the visitor.

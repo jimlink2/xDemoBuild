@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorball Numbers - Rules</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link href="./assets/css/default.css" rel="stylesheet" />
+    <script>
+      function loadPara(file, elementId, store) {
+        var xhr = new XMLHttpRequest();
+        var fileContent = '';
+        xhr.open('GET', file, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            fileContent = xhr.responseText || '[empty]';
+            if (elementId == 'Screen2Para1' || elementId == 'Screen2Para3') {
+              // do your replacements here
+              if (store == 1) {
+                fileContent = fileContent.replace(/CVS/g, 'SHEETZ');
+              } else if (store == 2) {
+                // leave it as it is ... this is CVS
+              } else if (store == 3) {
+                fileContent = fileContent.replace(/CVS/g, 'Coen');
+              } else if (store == 4) {
+                fileContent = fileContent.replace(/CVS/g, 'Primero');
+              } else {
+                fileContent = fileContent.replace(/CVS/g, '&lt;store&gt;');
+              }
+            }
+            document.getElementById(elementId).innerHTML = fileContent;
+          }
+        };
+        xhr.send();
+      }
+      
+      function getTextFiles() {
+        let anchorSearch = "";
+        const params = new URLSearchParams(window.location.search);
+        const incr = Number(params.get("incr") || 0);
+        const lastFour = params.get("lastFour") || "";
+        const store = params.get("store") || "";
+        const pronoun = params.get("pronoun") || "";
+        const phonePlays = Number(params.get("phonePlays") || 0);
+        const faveNums = params.get("faveNums") || "";
+        const playDiv = document.getElementById('exceededPlays');
+        let   lastReset = Number(params.get("lastReset") || 0);
+        let   playsRaw  = params.get("plays") || "";
+        
+        loadPara('Screen2Para1.txt', 'Screen2Para1', store);
+        loadPara('Screen2Para2.txt', 'Screen2Para2', store);
+        loadPara('Screen2Para3.txt', 'Screen2Para3', store);
+        loadPara('Screen2Para4.txt', 'Screen2Para4', store);
+        loadPara('Screen2Para5.txt', 'Screen2Para5', store);
+        loadPara('Screen2Para6.txt', 'Screen2Para6', store);
+        loadPara('Screen2Para7.txt', 'Screen2Para7', store);
+
+        anchorSearch =
+              "?faveNums=" + encodeURIComponent(faveNums) +
+              "&store=" + encodeURIComponent(store) +
+              "&pronoun=" + encodeURIComponent(pronoun) +
+              "&lastFour=" + encodeURIComponent(lastFour) +
+              "&phonePlays=" + phonePlays +
+              "&lastReset=" + lastReset +
+              "&incr=" + incr + 
+              "&plays=" + playsRaw;
+        document.getElementById('screen3HREF').href = "Screen3.html" + anchorSearch;
+      }
+    </script>
+  </head>
+
+  <body onload="getTextFiles()">
+	        <div className="row col-12" id="Screen_sub" style={{ background: '#FFF', height: '100%vh' }}>
+	            <div>
+			            <div className="bg-white text-center">
+			                <div className="col-12 kiosk_container">
+                        <div>
+                          <div>
+                              <div id="mainDiv3" className="row">
+                                <div id="title2">
+                                  <span class="green1">R</span><span class="red1">u</span><span class="blue3">l</span><span class="yellow2">e</span><span class="blue2">s</span> 
+                                  <span class="red3">f</span><span class="lime1">o</span><span class="blue1">r</span>
+                                  <span class="red1">C</span><span class="lime1">o</span><span class="red1">l</span><span class="blue2">o</span><span class="lime1">r</span><span class="blue2">b</span><span class="red3">a</span><span class="yellow2">l</span><span class="purple1">l</span>
+                                  <span class="blue3">G</span><span class="yellow2">i</span><span class="red1">f</span><span class="purple1">t</span><span class="lime1">s</span>
+                                  <span class="blue1">&</span>
+                                  <span class="red1">A</span><span class="purple1">d</span><span class="lime1">s</span>
+                                </div>
+                                <a id="screen3HREF" href="#">
+                                <div id="continueOvalDiv">
+                                      Continue
+                                </div>
+                                </a>
+                                <div id="body2">
+                                  <p id="Screen2Para1"></p>
+	                                <p id="Screen2Para2"></p>
+	                                <p id="Screen2Para3"></p>
+	                                <p id="Screen2Para4"></p>
+	                                <p id="Screen2Para5"></p>
+	                                <p id="Screen2Para6"></p>
+	                                <p id="Screen2Para7"></p>
+	                                <br>
+                                </div>
+                              </div>
+                          </div>
+			                  </div>
+			                </div>
+			            </div>
+	            </div>
+	        </div>
+</body>
+</html>

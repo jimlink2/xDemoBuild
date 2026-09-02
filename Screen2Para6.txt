@@ -1,0 +1,1 @@
+If the viewer does tap the screen on time, the next screen will display ten differently numbered balls being mixed in transparent chambers. The digits marked on each ball that randomly separates itself from the others and settles into the bottom of each chamber will form the random "hit" number.
