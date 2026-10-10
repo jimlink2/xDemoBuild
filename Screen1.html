@@ -12,6 +12,9 @@
     <script>
       let demoHoldTimer = null;
       const DEMO_HOLD_MS = 4000;     // 4 second hold
+      let demoMode = false;
+      let demoDigits = [7, 3, 1];
+      let demoCode = "7319";
 
       function cancelDemoHold() {
           if (demoHoldTimer) {
@@ -20,13 +23,21 @@
           }
       }
 
+      function startDemoHit() {
+          demoMode = true;
+          document.getElementById("Screen1Container").style.display = "none";
+          document.getElementById("demoScreen").style.display = "block";
+          document.getElementById("demoDigitsDisplay").innerHTML =
+            demoDigits.join("");
+      }
+
       function startDemoHold() {
           if (demoHoldTimer) return;
           
           demoHoldTimer = setTimeout(() => {
               demoHoldTimer = null;
               const code = prompt("Enter Demo Code");
-              if (code === "7319") {
+              if (code === demoCode) {
                   startDemoHit();
               }
           }, DEMO_HOLD_MS);
@@ -178,6 +189,23 @@
                 </div>
           </div>
       </div>
+    </div>
+    <div id="demoScreen" style="display:none;">
+      <h1>DEMO MODE</h1>
+       
+      <h2>Winning Number</h2>
+       
+      <div id="demoDigitsDisplay" style="
+      font-size: 150px;
+      font-weight: bold;
+      text-align: center;
+      color: red;
+      ">
+      </div>
+       
+      <button onclick="location.reload()">
+      Exit Demo
+      </button>
     </div>
 
 </body>
