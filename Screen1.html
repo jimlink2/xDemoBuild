@@ -13,6 +13,9 @@
       #demoScreen {
         padding: 3em;
       }
+      .exitButton {
+        font-size: 2em;
+      }
       .selectionCircle {
         /*margin-left: 60px;*/
       }
@@ -40,7 +43,27 @@
       ];
 
       let demoVideoIndex = 0;
-      
+      var demoFlashTimer = null; 
+           
+      function startDemoFlash() {
+          var flashContent = document.getElementById("demoFlashContent");
+          var isVisible = true;
+
+          if (demoFlashTimer !== null) {
+              clearInterval(demoFlashTimer);
+          }
+
+          demoFlashTimer = setInterval(function () {
+              isVisible = !isVisible;
+
+              if (isVisible) {
+                  flashContent.style.visibility = "visible";
+              } else {
+                  flashContent.style.visibility = "hidden";
+              }
+          }, 2000);
+      }
+
       function playVideo(targetDiv, fileNum) {
 
           var holder = document.getElementById(targetDiv);
@@ -113,6 +136,7 @@
 
                   v3.onended = function () {
                       showDemoDigits(3);
+                      startDemoFlash();
                   };
               };
           };
@@ -278,50 +302,50 @@
       </div>
     </div>
     <div id="demoScreen" style="display:none;">
-
       <h1>DEMO MODE</h1>
+      <div id="demoFlashContent">
 
-      <div id="submittedNumber"
-           style="
-             display:inline-block;
-             width:600px;
-             height: 80px;
-             justify-content:left;
-             margin-top:20px;
-             margin-bottom:20px;
-           ">
+        <div id="submittedNumber"
+             style="
+               display:inline-block;
+               width:600px;
+               height: 80px;
+               justify-content:left;
+               margin-top:20px;
+               margin-bottom:20px;
+             ">
+        </div>
+        <div id="demoDigitsDisplay"
+             style="
+               display:inline-block;
+               width:600px;
+               height: 80px;
+               justify-content:left;
+               margin-top:20px;
+               margin-bottom:20px;
+             ">
+        </div>
+
+        <div id="demoVideoRow"
+             style="
+               display:flex;
+               width:600px;
+               justify-content:left;
+               align-items:flex-start;
+               gap:20px;
+               margin-top:20px;
+               margin-bottom:20px;
+             ">
+
+            <div id="demoVideo1"></div>
+
+            <div id="demoVideo2"></div>
+
+            <div id="demoVideo3"></div>
+
+        </div>
       </div>
-      <div id="demoDigitsDisplay"
-           style="
-             display:inline-block;
-             width:600px;
-             height: 80px;
-             justify-content:left;
-             margin-top:20px;
-             margin-bottom:20px;
-           ">
-      </div>
-
-      <div id="demoVideoRow"
-           style="
-             display:flex;
-             width:400px;
-             justify-content:left;
-             align-items:flex-start;
-             gap:20px;
-             margin-top:20px;
-             margin-bottom:20px;
-           ">
-
-          <div id="demoVideo1"></div>
-
-          <div id="demoVideo2"></div>
-
-          <div id="demoVideo3"></div>
-
-      </div>
-
-      <button onclick="location.reload()">
+      <button class="exitButton" onclick="location.reload()">
           Exit Demo
       </button>
 
