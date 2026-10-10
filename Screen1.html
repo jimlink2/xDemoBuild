@@ -10,12 +10,21 @@
     <link rel="stylesheet" href="bootstrap.min.css">
     <link href="./assets/css/default.css" rel="stylesheet" />
     <style>
+      #demoScreen {
+        padding: 3em;
+      }
       .selectionCircle {
-        margin-left: 60px;
+        /*margin-left: 60px;*/
+      }
+      #submittedNumber {
+        display: inline-block;
+        height: 80px;
+        font-size: 2em;
       }
       #demoDigitsDisplay {
-        display: block;
+        display: inline-block;
         height: 80px;
+        font-size: 2em;
       }
     </style>
     <script>
@@ -76,14 +85,18 @@
           var digitsToShow = demoDigits.slice(0, count).join("");
 
           document.getElementById("demoDigitsDisplay").innerHTML =
+              "Hit No. " +
               buildDemoDigits(digitsToShow);
       }
 
       function startDemoHit() {
+          var submittedNums = "";
           demoMode = true;
 
           document.getElementById("Screen1Container").style.display = "none";
           document.getElementById("demoScreen").style.display = "block";
+          submittedNums = buildDemoDigits("731");
+          document.getElementById("submittedNumber").innerHTML = "Submitted No. " + submittedNums;
           document.getElementById("demoDigitsDisplay").innerHTML = "";
 
           var v1 = playVideo("demoVideo1", 477);
@@ -268,13 +281,22 @@
 
       <h1>DEMO MODE</h1>
 
+      <div id="submittedNumber"
+           style="
+             display:inline-block;
+             width:600px;
+             height: 80px;
+             justify-content:left;
+             margin-top:20px;
+             margin-bottom:20px;
+           ">
+      </div>
       <div id="demoDigitsDisplay"
            style="
-             display:flex;
-             width:400px;
+             display:inline-block;
+             width:600px;
+             height: 80px;
              justify-content:left;
-             align-items:flex-start;
-             gap:20px;
              margin-top:20px;
              margin-bottom:20px;
            ">
