@@ -10,6 +10,37 @@
     <link rel="stylesheet" href="bootstrap.min.css">
     <link href="./assets/css/default.css" rel="stylesheet" />
     <script>
+      let demoHoldTimer = null;
+      const DEMO_HOLD_MS = 4000;     // 4 second hold
+
+      function cancelDemoHold() {
+          if (demoHoldTimer) {
+              clearTimeout(demoHoldTimer);
+              demoHoldTimer = null;
+          }
+      }
+
+      function startDemoHold() {
+          if (demoHoldTimer) return;
+          
+          demoHoldTimer = setTimeout(() => {
+              demoHoldTimer = null;
+              const code = prompt("Enter Demo Code");
+              if (code === "7319") {
+                  startDemoHit();
+              }
+          }, DEMO_HOLD_MS);
+      }
+       
+      function setupDemoMode() {
+        const imgDiv = document.getElementById("store_img_div");
+        if (!imgDiv) return;
+        imgDiv.addEventListener("pointerdown", startDemoHold);
+        imgDiv.addEventListener("pointerup", cancelDemoHold);
+        imgDiv.addEventListener("pointerleave", cancelDemoHold);
+        imgDiv.addEventListener("pointercancel", cancelDemoHold);
+      }
+
       function getSearchInfo() {
         //var searchStr = window.location.search;
         let anchorSearch = "";
@@ -75,6 +106,7 @@
 //        if (anchorSearch == '') {
 //          var timeoutId = setTimeout(showAd, 30000);
 //        }
+        setupDemoMode();
       }
       
 //      function showAd() {
