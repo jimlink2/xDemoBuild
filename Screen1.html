@@ -41,7 +41,11 @@
           "433",
           "411"
       ];
+      let directMixHoldTimer = null;
 
+      const DIRECT_MIX_HOLD_MS = 4000;
+      const DIRECT_MIX_CODE = "3333";
+      
       let demoVideoIndex = 0;
       var demoFlashTimer = null; 
            
@@ -92,6 +96,45 @@
               clearTimeout(demoHoldTimer);
               demoHoldTimer = null;
           }
+      }
+      
+      function cancelDirectMixHold() {
+          if (directMixHoldTimer !== null) {
+              clearTimeout(directMixHoldTimer);
+              directMixHoldTimer = null;
+          }
+      }
+
+      function startDirectMixHold() {
+          if (directMixHoldTimer !== null) return;
+
+          directMixHoldTimer = setTimeout(function () {
+              directMixHoldTimer = null;
+
+              var code = prompt("Enter Direct Mixing Code");
+
+              if (code === DIRECT_MIX_CODE) {
+                  goToDirectMixSelection();
+              }
+          }, DIRECT_MIX_HOLD_MS);
+      }
+      
+      function goToDirectMixSelection() {
+          var selectionLink = document.getElementById("screen3HREF");
+
+          if (!selectionLink) {
+              alert("Number-selection link was not found.");
+              return;
+          }
+
+          var destination = new URL(
+              selectionLink.href,
+              window.location.href
+          );
+
+          destination.searchParams.set("directMix", "1");
+
+          window.location.href = destination.href;
       }
 
       function buildDemoDigits(displayDigits) {
@@ -163,6 +206,17 @@
         imgDiv.addEventListener("pointercancel", cancelDemoHold);
       }
 
+      function setupDirectMixMode() {
+          var trigger = document.getElementById("chambers_div");
+
+          if (!trigger) return;
+
+          trigger.addEventListener("pointerdown", startDirectMixHold);
+          trigger.addEventListener("pointerup", cancelDirectMixHold);
+          trigger.addEventListener("pointerleave", cancelDirectMixHold);
+          trigger.addEventListener("pointercancel", cancelDirectMixHold);
+      }
+
       function getSearchInfo() {
         //var searchStr = window.location.search;
         let anchorSearch = "";
@@ -229,6 +283,7 @@
 //          var timeoutId = setTimeout(showAd, 30000);
 //        }
         setupDemoMode();
+        setupDirectMixMode();
       }
       
 //      function showAd() {
@@ -290,13 +345,14 @@
                         Begin
                       </div>
                     </a>
-                      <div id="chambers_div">
+                    
+                    <div id="chambers_div">
                         <!--<img src="./assets/img/MixingChambers2.png" id="chambers_start2" />-->
                         <video id="CroppedChambers1" autoplay loop muted>
                           <source type="video/mp4" src="./assets/img/4_Mixing_Chambers.mp4" />
                         </video>
-                      </div>
-                   </div>
+                    </div>
+                  </div>
                 </div>
           </div>
       </div>

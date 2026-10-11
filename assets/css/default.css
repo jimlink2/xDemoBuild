@@ -292,10 +292,6 @@ video, video * {
   width: 800px;
 }
 
-#chambers_div {
-  text-align: center;
-}
-
 #chambers_start {
   width: 400px;
 }
@@ -1264,8 +1260,17 @@ li.nav-item.active a.nav-link {
 }
 
 #rightDiv3 {
-  width: 50%;
-  margin: 0 100px 0 0;
+  width: 45%;
+  height: 700px;
+  /*margin: 0 100px 0 0;*/
+  margin: 0;
+}
+
+#chambers_div {
+  display: block;
+  text-align: center;
+  height: 800px;
+  width: 500px;
 }
 
 #MrMrsTextDiv {

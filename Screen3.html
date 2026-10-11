@@ -134,7 +134,7 @@
         // READ URL PARAMETERS SAFELY
         // -------------------------------
         const params = new URLSearchParams(window.location.search);
-      
+        const directMix = params.get("directMix") === "1";
         const incr       = Number(params.get("incr") || 0);
         const lastFour   = params.get("lastFour")   || "";
         const store      = params.get("store")   || "";
@@ -237,7 +237,8 @@
           phonePlays,
           faveNums,
           lastReset,
-          playsRaw
+          playsRaw,
+          directMix
         };
       
         console.log("Updated state for next screen:", window.updatedState);
@@ -477,35 +478,38 @@
         
         const s = window.updatedState;
 
+        var nextScreen;
+
+        if (s.directMix) {
+            nextScreen = "screen5.html";
+        } else {
+            nextScreen = "screen4.html";
+        }
+
         let playsEncoded2 = Object.entries(plays)
             .map(([id, count]) => `${id}:${count}`)
             .join(",");
 
+        let nextUrl =
+            nextScreen + "?" +
+            `incr=${s.incr}` +
+            `&store=${encodeURIComponent(s.store)}` +
+            `&lastFour=${encodeURIComponent(s.lastFour)}` +
+            `&pronoun=${encodeURIComponent(s.pronoun)}` +
+            `&phonePlays=${s.phonePlays}` +
+            `&faveNums=${encodeURIComponent(s.faveNums)}` +
+            `&lastReset=${s.lastReset}` +
+            `&plays=${encodeURIComponent(playsEncoded2)}`;
+
         if (fakeDay) {
-            window.location.href =
-            `screen4.html?` +
-            `incr=${s.incr}` +
-            `&store=${encodeURIComponent(s.store)}` +
-            `&lastFour=${encodeURIComponent(s.lastFour)}` +
-            `&pronoun=${encodeURIComponent(s.pronoun)}` +
-            `&phonePlays=${s.phonePlays}` +
-            `&faveNums=${encodeURIComponent(s.faveNums)}` +
-            `&lastReset=${s.lastReset}` +
-            `&plays=${playsEncoded2}` +
-            `&fakeDay=1`;
-        } else {
-          window.location.href =
-            `screen4.html?` +
-            `incr=${s.incr}` +
-            `&store=${encodeURIComponent(s.store)}` +
-            `&lastFour=${encodeURIComponent(s.lastFour)}` +
-            `&pronoun=${encodeURIComponent(s.pronoun)}` +
-            `&phonePlays=${s.phonePlays}` +
-            `&faveNums=${encodeURIComponent(s.faveNums)}` +
-            `&lastReset=${s.lastReset}` +
-            `&plays=${playsEncoded2}`;
+            nextUrl += "&fakeDay=1";
         }
-      }
+
+        if (s.directMix) {
+            nextUrl += "&directMix=1";
+        }
+
+        window.location.href = nextUrl;      }
     </script>
   </body>
 </html>

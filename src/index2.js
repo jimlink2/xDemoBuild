@@ -302,22 +302,30 @@ function toggleMute() {
 }
 
 function replayGame() {
-  //window.location.href = "screen4?faveNums=" + faveNums + "&pronoun=" + pronoun + "&replaying=1";
-  let playsEncoded = Object.entries(plays)
-  .map(([id, count]) => `${id}:${count}`)
-  .join(",");
-  
-  window.location.href = 
-      "Screen3.html?store=" + store +
-          '&lastReset=' + lastReset +
-          "&faveNums=" + faveNums + 
-          "&pronoun=" + pronoun + 
-          '&lastFour=' + lastFour +
-          '&phonePlays=' + phonePlays +
-          '&incr=' + incr +
-          '&fakeDay=' + fakeDay +
-          '&replaying=' + replaying +
-          '&plays=' + playsEncoded;
+    const params = new URLSearchParams(window.location.search);
+    const directMix = params.get("directMix") === "1";
+
+    let playsEncoded = Object.entries(plays)
+        .map(([id, count]) => `${id}:${count}`)
+        .join(",");
+
+    let replayUrl =
+        "Screen3.html?store=" + encodeURIComponent(store) +
+        "&lastReset=" + lastReset +
+        "&faveNums=" + encodeURIComponent(faveNums) +
+        "&pronoun=" + encodeURIComponent(pronoun) +
+        "&lastFour=" + encodeURIComponent(lastFour) +
+        "&phonePlays=" + phonePlays +
+        "&incr=" + incr +
+        "&fakeDay=" + fakeDay +
+        "&replaying=" + replaying +
+        "&plays=" + encodeURIComponent(playsEncoded);
+
+    if (directMix) {
+        replayUrl += "&directMix=1";
+    }
+
+    window.location.href = replayUrl;
 }
 
 function backToStart() {
