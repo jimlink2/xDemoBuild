@@ -1273,6 +1273,13 @@ li.nav-item.active a.nav-link {
   width: 500px;
 }
 
+#exitDemoButton {
+  position: absolute;
+  left: 35%;
+  top: 700px;
+  font-size: 2em;
+}
+
 #MrMrsTextDiv {
   text-align: left;
 }

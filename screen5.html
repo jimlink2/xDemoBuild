@@ -24,6 +24,10 @@
       <div id="ReplayButton">REPLAY</div>
       <div id="WinnerButton">YOU WON!</div>
       <div id="TooManyReplays">No more replays today!</div>
+      <button
+          id="exitDemoButton"
+          onclick="exitDemo();"
+          style="display: none;">Exit Demo</button>
     </div>
     <script>
 //      let faveNums = "";
@@ -43,6 +47,16 @@
 //          "&lastReset=" + lastReset;
 //      }
 //    
+      function exitDemo() {
+
+          const params = new URLSearchParams(window.location.search);
+
+          const store = params.get("store") || "4";
+
+          window.location.href =
+              "Screen1.html?store=" + store;
+      }
+      
       function placeNums() {
     
         // -------------------------------

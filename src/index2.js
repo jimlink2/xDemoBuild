@@ -441,6 +441,30 @@ function updateClock() {
     console.log('readyToBet: ' + readyToBet);
 }
 
+var demoFlashTimer = null;
+
+function startDemoFlash() {
+
+    var flashContent =
+        document.getElementById("container");
+
+    var isVisible = true;
+
+    demoFlashTimer = setInterval(function () {
+
+        isVisible = !isVisible;
+
+        flashContent.style.visibility =
+            isVisible ? "visible" : "hidden";
+
+    }, 2000);
+    
+    let btn = document.getElementById("exitDemoButton");
+    if (btn) {
+        btn.style.display = "block";
+    }
+}
+
 function update_player_and_game(activeReduction) {
     const params = new URLSearchParams(window.location.search);
     let user_name = params.get("user") || "";
@@ -509,7 +533,18 @@ let player2Playing = false;
 let player3Playing = false;
 let player4Playing = false;
 
-let tempInitialRandomNums = myRand(movieIndexList, 4);
+//let tempInitialRandomNums = myRand(movieIndexList, 4);
+const xParams = new URLSearchParams(window.location.search);
+const demoMode = xParams.get("demoMode") === "1";
+
+let tempInitialRandomNums;
+
+if (demoMode) {
+    tempInitialRandomNums = [468, 477, 433, 411];
+    console.log("Demo mode enabled");
+} else {
+    tempInitialRandomNums = myRand(movieIndexList, 4);
+}
 console.log('tempInitialRandomNums is ' +  tempInitialRandomNums);
 //let tempInitialRandomVidIds = tempInitialRandomNums.map( num => parseInt(videoList[num], 10));
 let tempInitialRandomVidIds = tempInitialRandomNums.map( num => num );
@@ -772,6 +807,9 @@ function nextMovie(movieNumber) {
         console.log('WINNER!');
         document.getElementById("WinnerButton").style.visibility = 'visible';
         document.getElementById("ReplayButton").style.visibility = 'hidden';
+        if (demoMode) {
+          startDemoFlash();
+        }
         if (replayTimeout != null && typeof replayTimeout != "undefined") {
           clearTimeout(replayTimeout);
         }
