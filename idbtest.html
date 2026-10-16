@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 id="result">Testing...</h1>
+
+<script>
+if (window.indexedDB) {
+    document.getElementById("result").innerHTML =
+        "IndexedDB Available";
+} else {
+    document.getElementById("result").innerHTML =
+        "IndexedDB NOT Available";
+}
+</script>
+
+</body>
+</html>

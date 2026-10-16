@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    function getStore()
+    {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("store") || "";
+    }
+    
+    const store = getStore();
+  </script>
+  <link href="./assets/css/default.css" rel="stylesheet" />
+<body>
+
+<h1>Admin Menu</h1>
+
+<button class="bigButton" onclick="location.href='dbviewer.html?store=' + store">
+Database Viewer
+</button>
+
+<br><br>
+
+<button class="bigButton" onclick="location.href='Screen1.html?store=' + store">
+Return
+</button>
+
+</body>
+</html>

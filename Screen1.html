@@ -41,8 +41,13 @@
           "433",
           "411"
       ];
+      
+      let adminHoldTimer = null;
+      const ADMIN_HOLD_MS = 4000;     // 4 second hold
+      let adminMode = false;
+      let adminCode = "8888";
+      
       let directMixHoldTimer = null;
-
       const DIRECT_MIX_HOLD_MS = 4000;
       const DIRECT_MIX_CODE = "3333";
       
@@ -98,6 +103,13 @@
           }
       }
       
+      function cancelAdminHold() {
+          if (adminHoldTimer) {
+              clearTimeout(adminHoldTimer);
+              adminHoldTimer = null;
+          }
+      }
+      
       function cancelDirectMixHold() {
           if (directMixHoldTimer !== null) {
               clearTimeout(directMixHoldTimer);
@@ -148,6 +160,24 @@
               }
           }, DEMO_HOLD_MS);
       }
+
+      function startAdminHold() {
+          if (adminHoldTimer) return;
+          
+          adminHoldTimer = setTimeout(() => {
+              adminHoldTimer = null;
+              const code = prompt("Enter Admin Code");
+              if (code === adminCode) {
+                const params =
+                    new URLSearchParams(window.location.search);
+
+                const store =
+                    params.get("store") || "";
+
+                window.location.href = "admin2.html?store=" + store;
+              }
+          }, ADMIN_HOLD_MS);
+      }
        
       function setupDemoMode() {
         const imgDiv = document.getElementById("store_img_div");
@@ -156,6 +186,15 @@
         imgDiv.addEventListener("pointerup", cancelDemoHold);
         imgDiv.addEventListener("pointerleave", cancelDemoHold);
         imgDiv.addEventListener("pointercancel", cancelDemoHold);
+      }
+
+      function setupAdminMode() {
+        const adminDiv = document.getElementById("adminDiv");
+        if (!adminDiv) return;
+        adminDiv.addEventListener("pointerdown", startAdminHold);
+        adminDiv.addEventListener("pointerup", cancelAdminHold);
+        adminDiv.addEventListener("pointerleave", cancelAdminHold);
+        adminDiv.addEventListener("pointercancel", cancelAdminHold);
       }
 
       function setupDirectMixMode() {
@@ -235,6 +274,7 @@
 //          var timeoutId = setTimeout(showAd, 30000);
 //        }
         setupDemoMode();
+        setupAdminMode();
         setupDirectMixMode();
       }
       
@@ -245,6 +285,7 @@
 </head>
 
 <body onload="getSearchInfo()" id="Screen1Body">
+    <div id="adminDiv">&nbsp;</div>
     <div id="Screen1Container" class="container-fluid">
       <div id="Screen1TextContainer" className="bg-white text-center">
           <div id="Screen1KioskDiv" className="col-12 kiosk_container">

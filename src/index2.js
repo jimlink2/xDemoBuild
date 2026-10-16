@@ -118,6 +118,7 @@ let playsRaw = "";
 let incr = 0;
 let fakeDay = 0;
 let replaying = false;
+var playAlreadySaved = false;
 
 //const socket = new WebSocket('wss://colorball-ads.com/:443');
 //const socket = new WebSocket('wss://colorballnumbers.com/:443');
@@ -752,6 +753,12 @@ function nextMovie(movieNumber) {
     console.log('window.runScript is ' + window.runScript);
     if (!window.runScript) return;
     if (movieNumber === false) {
+      if (playAlreadySaved)
+      {
+          //alert("Already saved - skipping");
+          return;
+      }
+      playAlreadySaved = true;
       tempDoc2 = document.getElementById("vid4_num_b");
       tempDoc2.style.opacity = 1;
       lastDigit = getNumberFromId(tempList[3]);
@@ -761,8 +768,7 @@ function nextMovie(movieNumber) {
       let combinedNums = `${getNumberFromId(tempList[0])}${getNumberFromId(tempList[1])}${getNumberFromId(tempList[2])}${getNumberFromId(tempList[3])}`;
       //let combinedNums = `${getNumberFromId(tempList[1])}${getNumberFromId(tempList[2])}${getNumberFromId(tempList[3])}`;
       var circleStr = buildDisplayDigits(''+combinedNums);
-      document.getElementById('winning_number').innerHTML = `Hit No. ${circleStr}`;
-      
+
       // --------------------------------------
       // URL-BASED STATE (no cookies anymore)
       // --------------------------------------
@@ -784,7 +790,43 @@ function nextMovie(movieNumber) {
               plays[id] = Number(count);
           });
       }
+      
+      let playResult = "LOSE";
 
+      if (faveNums.length == 4 &&
+          faveNums == combinedNums)
+      {
+          playResult = "WIN";
+      }
+      else if (
+          faveNums.length == 3 &&
+          faveNums == combinedNums.substring(1))
+      {
+          playResult = "WIN";
+      }
+      
+      if (!store ||
+          !lastFour ||
+          !pronoun ||
+          !faveNums)
+      {
+          //alert("Values not ready");
+      }
+      else {
+          savePlay({
+              storeId: store,
+              visitorId: lastFour,
+              mfn: pronoun,
+              faveNums: faveNums,
+              winningNumber: combinedNums,
+              playResult: playResult,
+              adNo: 0,
+              adTap: false
+          });
+      }
+
+      document.getElementById('winning_number').innerHTML = `Hit No. ${circleStr}`;
+      
       console.log("phonePlays in index2:", phonePlays);
       console.log("lastReset 723 in index2:", lastReset);
       
@@ -1222,7 +1264,7 @@ function getGMTWithColons() {
 function startScript(faveNums, pronoun) {
       console.log('in startScript()... faveNums is ' + faveNums);
       window.runScript = true;
-      
+      playAlreadySaved = false;
       // Always read from URL if faveNums wasn't passed directly
       if (!faveNums) {
           console.log("@@@ Extracting values from URL...");

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Database Viewer</title>
+
+<script src="database.js"></script>
+<script>
+  function getStore()
+  {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("store") || "";
+  }
+  
+  const store = getStore();
+</script>
+<link href="./assets/css/default.css" rel="stylesheet" />
+
+<style>
+body
+{
+    font-family: Arial;
+    margin: 20px;
+}
+
+table
+{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td
+{
+    border: 1px solid #808080;
+    padding: 5px;
+    text-align: center;
+}
+
+th
+{
+    background-color: #dddddd;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Goodtel Database Viewer</h2>
+
+<button class="bigButton" onclick="window.location.href = 'admin2.html?store=' + store">
+Back to Admin Page
+</button>
+
+<!--
+<button class="bigButton" onclick="addTestRecord()">
+Add Test Record
+</button>
+-->
+
+<button class="bigButton" onclick="clearDatabase()" 
+        style="background-color:red;color:white;">
+Clear Database
+</button>
+
+<br><br>
+
+<table id="playsTable">
+
+<thead>
+<tr>
+    <th>ID</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Visitor</th>
+    <th>MFN</th>
+    <th>Guess</th>
+    <th>Winner</th>
+    <th>Result</th>
+    <th>Ad</th>
+    <th>Tap</th>
+</tr>
+</thead>
+
+<tbody>
+</tbody>
+
+</table>
+
+<script>
+
+initDatabase(loadRecords);
+
+function addTestRecord()
+{
+    savePlay(
+    {
+        storeId: 4,
+
+        visitorId: "4827",
+
+        mfn: "F",
+
+        faveNums: "4721",
+
+        winningNumber: "4721",
+
+        playResult: "WIN",
+
+        adNo: 17,
+
+        adTap: true
+
+    }, loadRecords);
+}
+
+function loadRecords()
+{
+    getAllPlays(function(records)
+    {
+        var tbody =
+            document.querySelector(
+                "#playsTable tbody"
+            );
+
+        tbody.innerHTML = "";
+
+        records.forEach(function(record)
+        {
+            var row =
+                tbody.insertRow();
+
+            row.insertCell().innerHTML =
+                record.id;
+
+            row.insertCell().innerHTML =
+                record.playDate;
+
+            row.insertCell().innerHTML =
+                record.playTime;
+
+            row.insertCell().innerHTML =
+                record.visitorId;
+
+            row.insertCell().innerHTML =
+                record.mfn;
+
+            row.insertCell().innerHTML =
+                record.faveNums;
+
+            row.insertCell().innerHTML =
+                record.winningNumber;
+
+            row.insertCell().innerHTML =
+                record.playResult;
+
+            row.insertCell().innerHTML =
+                record.adNo;
+
+            row.insertCell().innerHTML =
+                record.adTap;
+        });
+    });
+}
+
+</script>
+
+</body>
+</html>

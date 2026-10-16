@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 id="result">Testing database...</h1>
+
+<script>
+
+var request = indexedDB.open("GoodtelDB", 1);
+
+request.onupgradeneeded = function(event) {
+    var db = event.target.result;
+
+    if (!db.objectStoreNames.contains("plays")) {
+        db.createObjectStore("plays", {
+            keyPath: "id"
+        });
+    }
+};
+
+request.onsuccess = function(event) {
+
+    var db = event.target.result;
+
+    var tx = db.transaction(["plays"], "readwrite");
+    var store = tx.objectStore("plays");
+
+    store.put({
+        id: 1,
+        name: "Jim Test Record"
+    });
+
+    tx.oncomplete = function() {
+
+        var tx2 = db.transaction(["plays"], "readonly");
+        var store2 = tx2.objectStore("plays");
+
+        var getReq = store2.get(1);
+
+        getReq.onsuccess = function() {
+
+            document.getElementById("result").innerHTML =
+                getReq.result.name;
+        };
+    };
+};
+
+</script>
+
+</body>
+</html>

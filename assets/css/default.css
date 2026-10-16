@@ -2718,6 +2718,18 @@ li.nav-item.active a.nav-link {
   text-decoration-style: double;
 }
 
+.bigButton {
+  font-size: 2em;
+}
+
+#adminDiv {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+}
+
 .adminStuff {
   text-align: center;
   width: 90%;
